@@ -1,0 +1,6 @@
+<h1>Movie DB</h1>
+<div class="row card-group">
+    <div class="col-6 py-2"  *ngFor="let movie of movies">      
+        <app-movie [movie]="movie"></app-movie>
+    </div>
+</div>
