@@ -3,14 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MoviesStartComponent } from './view/movies-start/movies-start.component';
-import { MovieComponent } from './view/movies-start/movie/movie.component';
+import { MoviesListComponent } from './pages/movies-list/movies-list.component';
+import { ListOfMoviesComponent } from './components/list-of-movies/list-of-movies.component';
+import { PointerDirective } from './directive/pointer.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MoviesStartComponent,
-    MovieComponent
+    MoviesListComponent,
+    ListOfMoviesComponent,
+    PointerDirective
   ],
   imports: [
     BrowserModule,

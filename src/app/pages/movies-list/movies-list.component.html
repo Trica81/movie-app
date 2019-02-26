@@ -1,0 +1,16 @@
+<h1>Movie DB</h1>
+<div class="row card-group">
+    <div class="col-6 py-2"  *ngFor="let movie of movies">      
+        <app-list-of-movies 
+          appPointer
+          (logActors)="logActorbyId($event)"
+          [id]="movie.id"
+          [title]="movie.title"          
+          [description]="movie.description"
+          [imageSource]="movie.imageSource"
+          [director]="movie.director"
+          [rating]="movie.rating"
+          [actors]="movie.actors"
+          ></app-list-of-movies>
+    </div>
+</div>
