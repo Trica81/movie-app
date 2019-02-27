@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 
-export class AuthGuard implements CanActivate {
+export class DetailGuard implements CanActivate {
     constructor(private movieService: MovieService, private router: Router ) { }
 
     canActivate ( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {

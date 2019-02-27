@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AuthGuard } from './services/auth.guard';
+import { DetailGuard } from './services/detail.guard';
 import { AppComponent } from './app.component';
 import { MoviesListComponent } from './pages/movies-list/movies-list.component';
 import { PointerDirective } from './directive/pointer.directive';
@@ -12,12 +12,6 @@ import { MovieDetailComponent } from './pages/movie-detail/movie-detail.componen
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 
-const appRoutes: Routes = [
-  { path: '', component: MoviesListComponent },
-  { path: 'error', component: PageNotFoundComponent},
-  { path: 'detail/:id', component: MovieDetailComponent, canActivate: [AuthGuard]},
-  { path: '**', component: PageNotFoundComponent }
-];
 
 @NgModule({
   declarations: [
@@ -30,10 +24,9 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModule
   ],
-  providers: [AuthGuard],
+  providers: [DetailGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

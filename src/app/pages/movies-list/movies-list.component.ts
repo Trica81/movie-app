@@ -11,7 +11,7 @@ export class MoviesListComponent implements OnInit {
   movies: Movie[];
   constructor( private movieService: MovieService ) { }
 
-  getDetail(id) {
+  getDetail(id: number) {
     this.movieService.goToMovieDetail(id);
   }
 

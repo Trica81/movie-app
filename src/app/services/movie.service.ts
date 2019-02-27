@@ -79,16 +79,16 @@ export class MovieService {
    * @description Get Movie based on Id
    * @param id Number
    */
-  getMovie(id) {
+  getMovie(id: number) {
     return this.movies.find(movie => movie.getId() === id);
   }
 
-  movieExiste(id) {
-    return this.movies.find(movie => movie.getId() === id);
+  movieExiste(id: number) {
+    return this.getMovie(id);
   }
 
-  goToMovieDetail(id) {
-    this.router.navigate(['detail/' + id]);
+  goToMovieDetail(id: number) {
+    this.router.navigate(['movies/' + id]);
   }
 
 }
