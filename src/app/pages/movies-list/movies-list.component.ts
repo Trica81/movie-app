@@ -11,12 +11,13 @@ export class MoviesListComponent implements OnInit {
   movies: Movie[];
   constructor( private movieService: MovieService ) { }
 
-  ngOnInit() {
-    this.movies = this.movieService.movies;
+  getDetail(id) {
+    this.movieService.goToMovieDetail(id);
   }
 
-  logActorbyId(id) {
-    this.movieService.getActors(id);
+  ngOnInit() {
+    this.movies = this.movieService.getMovisList();
   }
+
 
 }

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Movie } from '../classes/movie';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
 
-  movies: Movie[] = [
+  constructor( private router: Router) { }
+  private movies: Movie[] = [
     new Movie({
       id: 1,
       title: 'How to Train Your Dragon: The Hidden World',
@@ -66,19 +68,27 @@ export class MovieService {
     })
   ];
 
-  getActors(id) {
-    const f = this.movies.find(movie => movie.getId() === id);
-    if (f) {
-      f.logActors();
-    }
-
-    let actors = [];
-    this.movies.forEach(movie => {
-      actors = actors.concat(movie.getActors());
-    });
-    actors = Array.from(new Set(actors));
-    console.log(actors);
+  /**
+   * @description Get full list of movies
+   */
+  getMovisList() {
+    return this.movies;
   }
 
-  constructor() { }
+  /**
+   * @description Get Movie based on Id
+   * @param id Number
+   */
+  getMovie(id) {
+    return this.movies.find(movie => movie.getId() === id);
+  }
+
+  movieExiste(id) {
+    return this.movies.find(movie => movie.getId() === id);
+  }
+
+  goToMovieDetail(id) {
+    this.router.navigate(['detail/' + id]);
+  }
+
 }

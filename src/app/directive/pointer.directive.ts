@@ -15,8 +15,8 @@ export class PointerDirective {
     this.pointer(null);
   }
 
-  private pointer(color: string) {
-    this.el.nativeElement.style.cursor = color;
+  private pointer(value: string) {
+    this.el.nativeElement.style.cursor = value;
   }
 
 }
