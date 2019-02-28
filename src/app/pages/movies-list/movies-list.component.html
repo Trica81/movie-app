@@ -1,15 +1,15 @@
+<app-movies-search (forSearch)="searchMovis($event)"></app-movies-search>
 <div class="row card-group">
-    <div class="col-6 py-2"  *ngFor="let movie of movies">      
-        <app-movie-item
-          appPointer
-          (movieDetail)="getDetail($event)"
-          [id]="movie.id"
-          [title]="movie.title"          
-          [description]="movie.description"
-          [imageSource]="movie.imageSource"
-          [director]="movie.director"
-          [rating]="movie.rating"
-          [actors]="movie.actors"
-          ></app-movie-item>
-    </div>
+  <div class="col-6 py-2" *ngFor="let movie of movies | movieSearch: term : searchProperty">
+    <app-movie-item 
+      appPointer (movieDetail)="getDetail($event)" 
+      [id]="movie.id" 
+      [title]="movie.title"
+      [description]="movie.description" 
+      [imageSource]="movie.imageSource" 
+      [director]="movie.director"
+      [rating]="movie.rating" 
+      [actors]="movie.actors"
+    ></app-movie-item>
+  </div>
 </div>

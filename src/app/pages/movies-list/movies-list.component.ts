@@ -9,10 +9,16 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MoviesListComponent implements OnInit {
   movies: Movie[];
+  term: String = '';
+  searchProperty: String = 'title';
   constructor( private movieService: MovieService ) { }
 
   getDetail(id: number) {
     this.movieService.goToMovieDetail(id);
+  }
+
+  searchMovis (term: any) {
+    this.term = term;
   }
 
   ngOnInit() {
