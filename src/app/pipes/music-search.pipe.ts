@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { arch } from 'os';
 
 @Pipe({
-  name: 'movieSearch'
+  name: 'musicSearch'
 })
-export class MovieSearchPipe implements PipeTransform {
+export class MusicSearchPipe implements PipeTransform {
 
   transform(value: any, term: any, property: any): any {
     const termToSerach = term;

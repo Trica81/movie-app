@@ -1,11 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-movies-search',
-  templateUrl: './movies-search.component.html',
-  styleUrls: ['./movies-search.component.sass']
+  selector: 'app-music-search',
+  templateUrl: './music-search.component.html',
+  styleUrls: ['./music-search.component.sass']
 })
-export class MoviesSearchComponent implements OnInit {
+export class MusicSearchComponent implements OnInit {
 
 
   @Output() forSearch = new EventEmitter();

@@ -1,0 +1,15 @@
+<app-music-search (forSearch)="searchMusic($event)"></app-music-search>
+<div class="row card-group">
+  <div class="col-6 py-2" *ngFor="let item of music | musicSearch: term : searchProperty">
+    <app-music-item 
+      appPointer (musicDetail)="getDetail($event)" 
+      [artist]="item.artist" 
+      [duration]="item.duration"
+      [image]="item.image[3]" 
+      [listeners]="item.listeners" 
+      [name]="item.name"
+      [url]="item.url" 
+      [mbid]="item.mbid"
+    ></app-music-item>
+  </div>
+</div>
