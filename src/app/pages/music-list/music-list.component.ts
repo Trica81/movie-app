@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { MusicService } from 'src/app/services/music.service';
 import { Music } from 'src/app/classes/music';
 
@@ -7,27 +7,33 @@ import { Music } from 'src/app/classes/music';
   templateUrl: './music-list.component.html',
   styleUrls: ['./music-list.component.sass']
 })
-export class MusicListComponent implements OnInit {
-  music: Music[];
+export class MusicListComponent implements OnInit, OnDestroy {
+
+  musicItems$ = this.musicService.musicItems$;
+  musicItems: Music[];
   term = '';
   searchProperty = 'name';
+  subject;
   constructor( private musicService: MusicService ) { }
 
-  getDetail(id: number) {
-    this.musicService.goToMovieDetail(id);
+  getArtist(id: string) {
+    console.log(id);
+    this.musicService.goToArtist(id);
   }
 
-  searchMusic (term: any) {
-    this.term = term;
+  searchMusic (term: string) {
+    this.musicService.loadTracks(term);
   }
 
   ngOnInit() {
-    this.music = this.musicService.getMusicList();
-    this.musicService.getMusicData('serbia')
-    .subscribe((item) => {
-      console.log(item);
-      this.music = item;
+
+    this.musicService.loadTracks('serbia');
+    this.musicService.musicItems$.subscribe(item => {
+      this.musicItems = item;
     });
+  }
+  ngOnDestroy() {
+
   }
 
 

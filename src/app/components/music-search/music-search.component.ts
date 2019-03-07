@@ -12,8 +12,8 @@ export class MusicSearchComponent implements OnInit {
 
   constructor() { }
 
-  inputSearch(event: any) {
-    this.forSearch.emit(event.target.value);
+  inputSearch(value: string) {
+    this.forSearch.emit(value);
   }
 
   ngOnInit() {

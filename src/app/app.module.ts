@@ -7,11 +7,12 @@ import { DetailGuard } from './services/detail.guard';
 import { AppComponent } from './app.component';
 import { MusicListComponent } from './pages/music-list/music-list.component';
 import { PointerDirective } from './directive/pointer.directive';
-import { MusicItemComponent } from './components/music-item/music-item.component';
 import { MusicDetailComponent } from './pages/music-detail/music-detail.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { MusicSearchComponent } from './components/music-search/music-search.component';
 import { MusicSearchPipe } from './pipes/music-search.pipe';
+import { TrackCardComponent } from './components/track-card/track-card.component';
+import { ArtistPageComponent } from './pages/artist-page/artist-page.component';
 
 
 
@@ -19,12 +20,13 @@ import { MusicSearchPipe } from './pipes/music-search.pipe';
   declarations: [
     AppComponent,
     MusicListComponent,
-    MusicItemComponent,
+    TrackCardComponent,
     PointerDirective,
     MusicDetailComponent,
     PageNotFoundComponent,
     MusicSearchComponent,
-    MusicSearchPipe
+    MusicSearchPipe,
+    ArtistPageComponent
   ],
   imports: [
     BrowserModule,
