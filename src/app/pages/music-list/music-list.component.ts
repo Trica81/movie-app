@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { MusicService } from 'src/app/services/music.service';
 import { Music } from 'src/app/classes/music';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-music-list',
@@ -9,7 +10,7 @@ import { Music } from 'src/app/classes/music';
 })
 export class MusicListComponent implements OnInit, OnDestroy {
 
-  musicItems$ = this.musicService.musicItems$;
+  musicItems$: Subscription;
   musicItems: Music[];
   term = '';
   searchProperty = 'name';
@@ -28,13 +29,15 @@ export class MusicListComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.musicService.loadTracks('serbia');
-    this.musicService.musicItems$.subscribe(item => {
+    this.musicItems$ = this.musicService.musicItems.subscribe(item => {
       this.musicItems = item;
     });
   }
-  ngOnDestroy() {
 
-  }
+
+  ngOnDestroy () {
+    this.musicItems$.unsubscribe();
+   }
 
 
 }

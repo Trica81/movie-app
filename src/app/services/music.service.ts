@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Music } from '../classes/music';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
-import { pipe } from '@angular/core/src/render3';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +18,8 @@ export class MusicService {
   private music: Music[] ;
   private _mucicItems: BehaviorSubject<Music[]> = new BehaviorSubject<Music[]>([]);
   private _artist: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  musicItems$ = this._mucicItems.asObservable();
-  artistData$ = this._artist.asObservable();
+  musicItems = this._mucicItems.asObservable();
+  artistData = this._artist.asObservable();
   private countryApiCall = [];
 
   /**
