@@ -1,18 +1,17 @@
 export class Music {
-    private attr: Object;
-    private artist: Object;
-    private duration: String;
-    private image: Object[];
-    private listeners: String;
-    private mbid: String;
-    private name: String;
-    private streamable: Object;
-    private url: String;
-    private helper = '@attr';
+    private attr: any;
+    private artist: any;
+    private duration: any;
+    private image: any[];
+    private listeners: any;
+    private mbid: any;
+    private name: any;
+    private streamable: any;
+    private url: any;
 
     constructor (value: any = {}) {
         Object.assign(this, {
-            attr: value[this.helper] || null,
+            attr: value['@attr'] || null,
             artist: value.artist || null,
             duration: value.duration || null,
             image: value.image || null,

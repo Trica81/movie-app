@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class ArtistPageComponent implements OnInit, OnDestroy {
   artistData$: Subscription;
-  private artistData: any;
+  artistData: any;
 
 
   constructor(private musicService: MusicService, private router: Router, private route: ActivatedRoute) { }

@@ -1,15 +1,7 @@
-<div class="card"  *ngIf="artistData != null">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img [src]="artistData.img" class="card-img" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <p class="card-title">Artist: {{ artistData.name }}</p> 
-        <p class="card-text">Artist: {{ artistData.bio }}</p> 
-      </div>
-    </div>
-  </div>
+<div *ngIf="artistData != null">
+    <app-artist-card 
+      [artistName]="artistData.name"
+      [img]="artistData.img"
+      [bio]="artistData.bio"
+      [tags]="artistData.tag"></app-artist-card>
 </div>
-<!-- {{ artist.bio  | async}}
-<h2>{{ artist |async | json }}</h2> -->

@@ -23,7 +23,7 @@ export class TrackCardComponent implements OnInit {
   constructor( ) { }
 
   detailArtist() {
-    this.musicArtist.emit(this.artist.name);
+    this.musicArtist.emit(this.artist.mbid);
   }
 
   ngOnInit() {

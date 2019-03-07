@@ -80,14 +80,16 @@ export class MusicService {
       }
   }
 
-  loadArtist(name) {
-    this._http.get<any>(`${this.BASE_URL}?method=artist.getinfo&artist=${name}&api_key=7aca6ef86ceb095034f88fa36aa6e3f9&format=json`)
+  loadArtist(id: string) {
+    this._http.get<any>(`${this.BASE_URL}?method=artist.getinfo&mbid=${id}&api_key=7aca6ef86ceb095034f88fa36aa6e3f9&format=json`)
     .pipe(
       map(item => {
         const artist = {
           name: item.artist.name,
-          bio: item.artist.bio.summary,
-          img: item.artist.image[4]['#text']
+          bio: item.artist.bio.content,
+          img: item.artist.image[4]['#text'],
+          tag: item.artist.tags.tag,
+          url: item.artist.url
         };
         return artist;
       })

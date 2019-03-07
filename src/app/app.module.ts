@@ -13,6 +13,7 @@ import { MusicSearchComponent } from './components/music-search/music-search.com
 import { MusicSearchPipe } from './pipes/music-search.pipe';
 import { TrackCardComponent } from './components/track-card/track-card.component';
 import { ArtistPageComponent } from './pages/artist-page/artist-page.component';
+import { ArtistCardComponent } from './components/artist-card/artist-card.component';
 
 
 
@@ -26,7 +27,8 @@ import { ArtistPageComponent } from './pages/artist-page/artist-page.component';
     PageNotFoundComponent,
     MusicSearchComponent,
     MusicSearchPipe,
-    ArtistPageComponent
+    ArtistPageComponent,
+    ArtistCardComponent
   ],
   imports: [
     BrowserModule,

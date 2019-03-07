@@ -18,7 +18,6 @@ export class MusicListComponent implements OnInit, OnDestroy {
   constructor( private musicService: MusicService ) { }
 
   getArtist(id: string) {
-    console.log(id);
     this.musicService.goToArtist(id);
   }
 
