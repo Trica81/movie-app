@@ -1,8 +1,8 @@
-import { MovieSearchPipe } from './movie-search.pipe';
+import { MusicSearchPipe } from './music-search.pipe';
 
-describe('MovieSearchPipe', () => {
+describe('MusicSearchPipe', () => {
   it('create an instance', () => {
-    const pipe = new MovieSearchPipe();
+    const pipe = new MusicSearchPipe();
     expect(pipe).toBeTruthy();
   });
 });

@@ -1,8 +1,9 @@
 <app-music-search (forSearch)="searchMusic($event)"></app-music-search>
 <div class="row card-group">
-  <div class="col-6 py-2" *ngFor="let item of musicItems | musicSearch: term : searchProperty">
+  <div class=".col-lg-3 col-md-4 col-sm-6 py-2" *ngFor="let item of musicItems | musicSearch: term : searchProperty">
     <app-track-card 
       (musicArtist)="getArtist($event)" 
+      (musicSong)="getSong($event)"
       [artist]="item.artist" 
       [duration]="item.duration"
       [image]="item.image[3]" 

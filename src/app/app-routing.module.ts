@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { DetailGuard } from './services/detail.guard';
 import { MusicListComponent } from './pages/music-list/music-list.component';
 import { ArtistPageComponent } from './pages/artist-page/artist-page.component';
+import { SongPageComponent } from './pages/song-page/song-page.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'music', component: MusicListComponent },
   { path: 'error', component: PageNotFoundComponent},
   { path: 'artists/:id', component: ArtistPageComponent},
+  { path: 'song/:id', component: SongPageComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 

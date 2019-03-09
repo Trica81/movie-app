@@ -10,15 +10,28 @@ import { Subscription } from 'rxjs';
 })
 export class MusicListComponent implements OnInit, OnDestroy {
 
-  musicItems$: Subscription;
+  subscribe: Subscription;
   musicItems: Music[];
   term = '';
   searchProperty = 'name';
-  subject;
+
+
   constructor( private musicService: MusicService ) { }
 
   getArtist(id: string) {
+    if (id === '') {
+      this.musicService.msgInfo(`There is no data available for this artist.`);
+    } else {
     this.musicService.goToArtist(id);
+    }
+  }
+
+  getSong(id: string) {
+    if (id === '') {
+      this.musicService.msgInfo(`There is no data available for this song.`);
+    } else {
+      this.musicService.goToSong(id);
+    }
   }
 
   searchMusic (term: string) {
@@ -26,16 +39,15 @@ export class MusicListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     this.musicService.loadTracks('serbia');
-    this.musicItems$ = this.musicService.musicItems.subscribe(item => {
+    this.subscribe = this.musicService.musicItems$.subscribe( (item) => {
       this.musicItems = item;
     });
   }
 
 
   ngOnDestroy () {
-    this.musicItems$.unsubscribe();
+    this.subscribe.unsubscribe();
    }
 
 

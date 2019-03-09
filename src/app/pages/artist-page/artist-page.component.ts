@@ -9,7 +9,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./artist-page.component.sass']
 })
 export class ArtistPageComponent implements OnInit, OnDestroy {
-  artistData$: Subscription;
+
+  private subscription: Subscription;
   artistData: any;
 
 
@@ -18,13 +19,13 @@ export class ArtistPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const name = this.route.snapshot.params['id'];
     this.musicService.loadArtist(name);
-    this.artistData$ = this.musicService.artistData.subscribe(item => {
+    this.subscription = this.musicService.artistData$.subscribe(item => {
       this.artistData = item;
     });
   }
 
  ngOnDestroy () {
-  this.artistData$.unsubscribe();
+  this.subscription.unsubscribe();
  }
 
 

@@ -1,6 +1,5 @@
 *
-    color: #fff;
-
+  color: #fff;
     
 .wrapper
   padding-top: 40px
@@ -11,120 +10,56 @@
 
 .track-card
   background: white
-  width: 300px
+  max-width: 250px
   display: inline-block
   margin: 0 auto
   border-radius: 19px
   position: relative
   text-align: center
-  box-shadow: -1px 15px 30px -12px black
+  transition-timing-function: ease-in
+  transition: 0.25s
+  box-shadow: 0 5px 5px rgba(0,0,0,.16)
   z-index: 9999
+  &:hover
+    box-shadow: -10px 15px 30px -12px white
+    transform: translate(5px,-10px)
+    transition-timing-function: ease-out
+    transition: 0.25s
+    transition-delay: 0s !important
+    .card-img
+      overflow: hidden
+      transform: scale(1.2)
+
+.card-img
+  transition: 1.25s
+  overflow: hidden
 
 .track-card_image
   position: relative
+  overflow: hidden
+  border-top-left-radius: 18px
+  border-top-right-radius: 18px
   height: 230px
   margin-bottom: 35px
-  border-top-left-radius: 14px
-  border-top-right-radius: 14px
 
-
-.clash-card
-  text-transform: uppercase
-  font-size: 12px
-  font-weight: 700
-  margin-bottom: 3px
-
-.clash-card-artist
+.card-artist
   color: #EC9B3B
-
-.clash-card__level--archer
-  color: #EE5487
-
-.clash-card__level--giant
-  color: #F6901A
-
-.clash-card__level--goblin
-  color: #82BB30
-
-.clash-card__level--wizard
-  color: #4FACFF
+  &:hover
+    color: #3b8eec
+    transition: color 0.25s
+  
+.card-img 
+  border-top-left-radius: 18px
+  border-top-right-radius: 18px
 
 .track-card-song
-  font-size: 26px
+  font-size: 18px
   color: black
   font-weight: 900
   margin-bottom: 5px
+  cursor: pointer
 
 .track-card-duration
   padding: 20px
   margin-bottom: 10px
   color: #4FACFF
-
-.clash-card__unit-stats--barbarian
-  background: #EC9B3B
-  .one-third
-    border-right: 1px solid #BD7C2F
-
-.clash-card__unit-stats--archer
-  background: #EE5487
-  .one-third
-    border-right: 1px solid #D04976
-
-.clash-card__unit-stats--giant
-  background: #F6901A
-  .one-third
-    border-right: 1px solid #de7b09
-
-.clash-card__unit-stats--goblin
-  background: #82BB30
-  .one-third
-    border-right: 1px solid #71a32a
-
-.clash-card__unit-stats--wizard
-  background: #4FACFF
-  .one-third
-    border-right: 1px solid #309eff
-
-.clash-card__unit-stats
-  color: white
-  font-weight: 700
-  border-bottom-left-radius: 14px
-  border-bottom-right-radius: 14px
-  .one-third
-    width: 33%
-    float: left
-    padding: 20px 15px
-  sup
-    position: absolute
-    bottom: 4px
-    font-size: 45%
-    margin-left: 2px
-  .stat
-    position: relative
-    font-size: 24px
-    margin-bottom: 10px
-  .stat-value
-    text-transform: uppercase
-    font-weight: 400
-    font-size: 12px
-  .no-border
-    border-right: none
-
-.clearfix:after
-  visibility: hidden
-  display: block
-  font-size: 0
-  content: " "
-  clear: both
-  height: 0
-
-.slick-prev
-  left: 100px
-  z-index: 999
-
-.slick-next
-  right: 100px
-  z-index: 999
-
-  *
-    color: #fff

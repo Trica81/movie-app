@@ -1,0 +1,18 @@
+<div *ngIf="song !== null;else noSong">
+    <app-song-card    
+      [srcImg]="song.srcImg"
+      [tags]="song.tags"
+      [songName]="song.songName"
+      [songArtist]="song.songArtist"
+      [songArtist]="song.songArtist"
+      [songAlbum]="song.songAlbum"
+      [publishDate]="song.publishDate"
+      [link]="song.link"
+      [wiki]="song.wiki"
+      [mbid]="song.mbid"></app-song-card>
+</div>
+<ng-template #noSong>
+  No data
+</ng-template>
+  
+

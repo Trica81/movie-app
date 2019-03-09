@@ -19,11 +19,16 @@ export class TrackCardComponent implements OnInit {
 
 
   @Output() musicArtist = new EventEmitter();
+  @Output() musicSong = new EventEmitter();
 
   constructor( ) { }
 
   detailArtist() {
     this.musicArtist.emit(this.artist.mbid);
+  }
+
+  detailSong () {
+    this.musicSong.emit(this.mbid);
   }
 
   ngOnInit() {

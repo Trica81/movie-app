@@ -4,10 +4,10 @@
     <div class="track-card_image">
       <img  class="card-img h-100" [src]="imgUrl" alt="{{artist.name}}" />
     </div>
-    <div appPointer class="track-card clash-card-artist" (click)="detailArtist()">Artist: {{ artist.name }}</div>
-    <div class="track-card-song">Song: {{ name }}</div>
+    <div appPointer class="card-artist" (click)="detailArtist()">Artist: {{ artist.name }}</div>
+    <div class="track-card-song" (click)="detailSong()">Song: {{ name }}</div>
     <div class="track-card-duration">
-        Duration: {{ duration/60 | number:'2.0-0'  }}:{{ duration%60 | number:'2.0-0'}}
+        Duration: {{ duration | duration }}
     </div>
   </div> <!-- end clash-card barbarian-->
 </div>

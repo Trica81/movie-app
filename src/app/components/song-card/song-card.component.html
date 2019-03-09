@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img [src]="srcImg" title="{{ songName }}" class="card-img" [alt]="album">
+        <h4>Top tags:</h4>
+        <ul>
+          <li  *ngFor="let tag of tags">{{ tag.name }}</li>
+        </ul>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h3 class="card-title">Song: {{ songName }}</h3> 
+          <h3 class="card-title">Artist: {{ songArtist}}</h3> 
+          <h3 class="card-title">Album: {{ songAlbum }}</h3> 
+          <div class="card-text"><strong>Song info: </strong>  <p [innerHtml]="wiki"></p></div> 
+          <p>Publish Date: {{ publishDate | date: 'd/M/yy' }}</p>
+          <p>Song link: <a [href]="link" target="_blank">{{ songName }}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
