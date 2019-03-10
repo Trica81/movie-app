@@ -16,19 +16,20 @@ export class MusicService {
   constructor( private router: Router, private _http: HttpClient, private authService: AuthService ) { }
 
   private BASE_URL = 'http://ws.audioscrobbler.com/2.0/';
-  private music: Music[] ;
+  private music: Music[];
+  private user: any;
 
   private _mucicItems: BehaviorSubject<Music[]> = new BehaviorSubject<Music[]>([]);
   private _artist: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   private _song: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   private _msg: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  private _isLoggin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private _user: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
+  user$ = this._user.asObservable();
   musicItems$ = this._mucicItems.asObservable();
   artistData$ = this._artist.asObservable();
   songData$ = this._song.asObservable();
   msg$ = this._msg.asObservable();
-  isLoggin$ = this._isLoggin.asObservable();
 
   private countryApiCall = [];
   private artistApiCall = [];
@@ -42,7 +43,6 @@ export class MusicService {
 
 
   loadTracks (country) {
-    // const user = this.authService.isLoggIn();
     const f = this.countryApiCall.find(item => item.country === country);
     if ( f ) {
       this._mucicItems.next(f.value);

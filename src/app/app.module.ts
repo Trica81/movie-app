@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, enableProdMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { DetailGuard } from './services/detail.guard';
+import { LogInGuard } from './services/login.guard';
 import { AppComponent } from './app.component';
 import { MusicListComponent } from './pages/music-list/music-list.component';
 import { PointerDirective } from './directive/pointer.directive';
@@ -23,7 +23,6 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { AuthService } from './services/auth.service';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-enableProdMode();
 
 
 
@@ -53,7 +52,7 @@ enableProdMode();
     HttpClientModule,
     FormsModule
   ],
-  providers: [DetailGuard, AuthService],
+  providers: [LogInGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

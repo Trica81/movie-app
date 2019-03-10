@@ -5,9 +5,11 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-    token: string;
+    token = '';
     private _isLoggin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    private _user: BehaviorSubject<boolean> = new BehaviorSubject<any>(null);
     isLoggin$ = this._isLoggin.asObservable();
+    user$ = this._user.asObservable();
 
     constructor(private router: Router) { }
     signupUser( email: string, password: string) {
@@ -43,20 +45,13 @@ export class AuthService {
         );
     }
 
-    getToken () {
-       firebase.auth().currentUser.getIdToken()
-        .then(
-            (token: string) => {
-                this.token = token;
-            }
-        );
-        return this.token;
+    getUser () {
+        return firebase.auth().currentUser;
     }
 
     isLogged () {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                console.log('user', user);
                 this._isLoggin.next(true);
             } else {
                 this._isLoggin.next(false);
