@@ -4,6 +4,7 @@ import { Music } from '../classes/music';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { map, filter } from 'rxjs/operators';
 
 export class MusicService {
 
-  constructor( private router: Router, private _http: HttpClient) { }
+  constructor( private router: Router, private _http: HttpClient, private authService: AuthService ) { }
 
   private BASE_URL = 'http://ws.audioscrobbler.com/2.0/';
   private music: Music[] ;
@@ -21,11 +22,13 @@ export class MusicService {
   private _artist: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   private _song: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   private _msg: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  private _isLoggin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   musicItems$ = this._mucicItems.asObservable();
   artistData$ = this._artist.asObservable();
   songData$ = this._song.asObservable();
   msg$ = this._msg.asObservable();
+  isLoggin$ = this._isLoggin.asObservable();
 
   private countryApiCall = [];
   private artistApiCall = [];
@@ -34,23 +37,12 @@ export class MusicService {
   private _infoMsg: any;
 
 
-  count = true;
-  /**
-   * @description Get full list of music
-   */
-  getMusicList() {
-    return this.music;
-  }
 
-  /**
-   * @description Get Movie based on Id
-   * @param id Number
-   */
-  getMusic(id: string) {
-    return true;
-  }
+
+
 
   loadTracks (country) {
+    // const user = this.authService.isLoggIn();
     const f = this.countryApiCall.find(item => item.country === country);
     if ( f ) {
       this._mucicItems.next(f.value);
@@ -127,7 +119,7 @@ export class MusicService {
   }
 
 
-  getSong(id: string) {
+  loadSongInfo(id: string) {
     const f = this.songApiCall.find(item => item.id === id);
     if ( f ) {
       this._artist.next(f.value);
@@ -179,13 +171,10 @@ export class MusicService {
     this._msg.next(this._infoMsg);
   }
 
-  musicExiste(id: string) {
-    return this.getMusic(id);
-  }
-
   goToArtist(id: string) {
     this.router.navigate(['artists/' + id]);
   }
+
   goToSong( id: string) {
     this.router.navigate(['song/' + id]);
   }

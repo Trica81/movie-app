@@ -14,14 +14,7 @@ export class MusicDetailComponent implements OnInit {
   constructor(private musicService: MusicService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.params['id'];
-    const music = this.musicService.getMusic(id);
 
-    if (music) {
-      // this.musicDetail = music;
-    } else {
-      this.router.navigate(['error']);
-    }
   }
 
 }

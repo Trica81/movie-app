@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, enableProdMode } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { DetailGuard } from './services/detail.guard';
@@ -18,6 +19,11 @@ import { DurationPipe } from './pipes/duration.pipe';
 import { AlertMsgComponent } from './components/alert-msg/alert-msg.component';
 import { SongCardComponent } from './components/song-card/song-card.component';
 import { SongPageComponent } from './pages/song-page/song-page.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { SigninComponent } from './pages/signin/signin.component';
+import { AuthService } from './services/auth.service';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+enableProdMode();
 
 
 
@@ -36,14 +42,18 @@ import { SongPageComponent } from './pages/song-page/song-page.component';
     DurationPipe,
     AlertMsgComponent,
     SongCardComponent,
-    SongPageComponent
+    SongPageComponent,
+    SignupComponent,
+    SigninComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [DetailGuard],
+  providers: [DetailGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,7 +11,7 @@ export class DetailGuard implements CanActivate {
     canActivate ( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
         const id = route.params.id;
-        if (this.musicService.musicExiste(id)) {
+        if (true) {
             return true;
         } else {
             this.router.navigate(['error']);

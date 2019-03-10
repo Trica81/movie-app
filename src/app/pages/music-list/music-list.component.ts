@@ -39,6 +39,7 @@ export class MusicListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     this.musicService.loadTracks('serbia');
     this.subscribe = this.musicService.musicItems$.subscribe( (item) => {
       this.musicItems = item;

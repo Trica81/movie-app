@@ -17,7 +17,7 @@ export class SongPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    this.musicService.getSong(id);
+    this.musicService.loadSongInfo(id);
     this.subscription = this.musicService.songData$.subscribe((item) => {
       if ( item !== null ) {
         this.song = {
