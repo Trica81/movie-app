@@ -1,3 +1,3 @@
-<div *ngIf="info !== null" class="alert {{ info.msgClass }} msg" role="alert">
+<div *ngIf="info !== null && isShow" class="alert {{ info.msgClass }} msg" role="alert">
   {{ info.message }}
 </div>

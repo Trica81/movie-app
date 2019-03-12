@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Music } from '../classes/music';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
@@ -36,11 +36,6 @@ export class MusicService {
   private songApiCall = [];
 
   private _infoMsg: any;
-
-
-
-
-
 
   loadTracks (country) {
     const f = this.countryApiCall.find(item => item.country === country);
