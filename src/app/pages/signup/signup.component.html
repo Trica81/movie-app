@@ -54,7 +54,7 @@
             <div>User Name is required</div>
           </div>
       </div>
-      <button class="btn btn-primary" type="submit">Sign Up</button>
+      <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid">Sign Up</button>
     </form>
   </div>
 </div>

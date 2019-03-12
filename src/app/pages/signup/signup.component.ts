@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
      if (password !== confirmPassword) {
          control.get('passwordConfirm').setErrors( {MatchPassword: true} );
      } else {
-      control.get('passwordConfirm').setErrors( {MatchPassword: false} );
+      return null;
      }
  }
 
@@ -43,11 +43,13 @@ export class SignupComponent implements OnInit {
 
   onSubmit ( ) {
     const { email, password, userName, passwordConfirm } = this.registerForm.value;
-    console.log(email, password, userName, passwordConfirm);
-    if ( password !== passwordConfirm ) {
-      this.musicService.msgInfo(`Password need to match Confirm Password`);
-    } else {
+    if (this.registerForm.valid) {
       this.authService.signupUser(email, password );
+    } else {
+      Object.keys(this.registerForm.controls).forEach(field => { // {1}
+        const control = this.registerForm.get(field);            // {2}
+        control.markAsTouched({ onlySelf: true });       // {3}
+      });
     }
 
   }
