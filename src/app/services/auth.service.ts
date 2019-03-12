@@ -32,6 +32,7 @@ export class AuthService {
                     .then(
                         (token: string) => {
                             this.token = token;
+                            localStorage.setItem("Token", token);
                             this._isLoggin.next(true);
                             this.router.navigate(['']);
                         }
@@ -46,7 +47,7 @@ export class AuthService {
     }
 
     getUser () {
-        return firebase.auth().currentUser;
+        return localStorage.getItem("Token");
     }
 
     isLogged () {
@@ -61,6 +62,7 @@ export class AuthService {
 
     logOut () {
         firebase.auth().signOut();
+        localStorage.removeItem("Token");
         this._isLoggin.next(false);
         this.router.navigate(['']);
     }

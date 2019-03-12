@@ -9,15 +9,15 @@ import { AuthService } from './auth.service';
 export class LogInGuard implements CanActivate {
 
     constructor(private authService: AuthService, private musicService: MusicService,  private router: Router ) { }
-
     canActivate ( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         // return true;
-        const user = this.authService.getUser();
+        const user = this.authService.getUser(); 
         if ( user != null ) {
             return true;
         } else {
-            this.router.navigate(['']);
+            this.router.navigate(['login']);
             this.musicService.msgInfo(`Please log in.`);
+            return false;
         }
     }
 }
