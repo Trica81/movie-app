@@ -1,5 +1,6 @@
 <div class="card">
   <div class="row no-gutters">
+    <div class="like" (click)="likeMe()"><i [ngClass]="isLiked ?  'fa-thumbs-up' : 'fa-thumbs-o-up'"  class="fa"></i></div>
     <div class="col-md-4">
       <img [src]="img" title="{{ artistName }}" class="card-img" [alt]="artistName">
       <h4>Genre</h4>

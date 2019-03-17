@@ -1,5 +1,6 @@
 <div *ngIf="song !== null;else noSong">
     <app-song-card    
+      (sendSongId)="onLikeSong($event)"
       [srcImg]="song.srcImg"
       [tags]="song.tags"
       [songName]="song.songName"
@@ -9,6 +10,7 @@
       [publishDate]="song.publishDate"
       [link]="song.link"
       [wiki]="song.wiki"
+      [isLiked]="isLiked"
       [mbid]="song.mbid"></app-song-card>
 </div>
 <ng-template #noSong>

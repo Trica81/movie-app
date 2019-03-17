@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MusicService } from 'src/app/services/music.service';
 
 @Component({
@@ -17,7 +17,14 @@ export class SongCardComponent implements OnInit {
   @Input() link: string;
   @Input() mbid: string;
   @Input() wiki: string;
+  @Input() isLiked: string;
+
+  @Output() sendSongId = new EventEmitter();
   constructor( private musicService: MusicService) { }
+
+  likeMe() {
+    this.sendSongId.emit(this.mbid);
+  }
 
   ngOnInit() {
   }

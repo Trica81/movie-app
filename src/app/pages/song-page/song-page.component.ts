@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MusicService } from 'src/app/services/music.service';
 import { Route, ActivatedRoute } from '@angular/router';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-song-page',
@@ -11,13 +12,14 @@ import { Route, ActivatedRoute } from '@angular/router';
 export class SongPageComponent implements OnInit, OnDestroy {
 
   song: any = null;
+  isLiked = false;
 
   subscription: Subscription;
-  constructor(private musicService: MusicService, private route: ActivatedRoute ) { }
+  constructor(private musicService: MusicService, private route: ActivatedRoute, private localService: LocalStorageService ) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.params['id'];
-    this.musicService.loadSongInfo(id);
+    const songId = this.route.snapshot.params['id'];
+    this.musicService.loadSongInfo(songId);
     this.subscription = this.musicService.songData$.subscribe((item) => {
       if ( item !== null ) {
         this.song = {
@@ -31,8 +33,17 @@ export class SongPageComponent implements OnInit, OnDestroy {
           mbid: item.mbid,
           wiki: item.wiki
         };
+        const userId = this.musicService.userId();
+        this.isLiked = this.localService.isLiked('users', userId, songId, 'songsLikes');
       }
     });
+  }
+
+  onLikeSong(id: string) {
+    const userId = this.musicService.userId();
+    this.localService.likedItem('users', userId, id, 'songsLikes');
+    this.isLiked = true;
+
   }
 
   ngOnDestroy() {

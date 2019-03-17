@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class AuthService {
+export class LogInService {
     token = '';
     private _isLoggin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     private _user: BehaviorSubject<boolean> = new BehaviorSubject<any>(null);
@@ -35,6 +35,7 @@ export class AuthService {
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(
             response => {
+                localStorage.setItem('UserId', response.user.uid);
                 firebase.auth().currentUser.getIdToken()
                     .then(
                         (token: string) => {
@@ -53,8 +54,13 @@ export class AuthService {
         );
     }
 
-    getUser () {
+    getUserToken () {
         return localStorage.getItem('Token');
+    }
+
+    getUserId() {
+       const id = localStorage.getItem('UserId');
+        return id;
     }
 
     isLogged () {
@@ -68,6 +74,7 @@ export class AuthService {
     logOut () {
         firebase.auth().signOut();
         localStorage.removeItem('Token');
+        localStorage.removeItem('UserId');
         this._isLoggin.next(false);
         this.router.navigate(['']);
     }

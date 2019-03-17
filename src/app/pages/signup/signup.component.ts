@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormGroup, FormControl, Validators, AbstractControl, FormBuilder } from '@angular/forms';
 
-import { AuthService } from 'src/app/services/auth.service';
 import { MusicService } from 'src/app/services/music.service';
+import { LogInService } from 'src/app/services/log-in.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +13,7 @@ export class SignupComponent implements OnInit {
 
 
 
-  constructor( private authService: AuthService, private musicService: MusicService, private fb: FormBuilder) { }
+  constructor( private logInService: LogInService, private musicService: MusicService, private fb: FormBuilder) { }
 
   registerForm: FormGroup;
 
@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
   onSubmit ( ) {
     const { email, password, userName, passwordConfirm } = this.registerForm.value;
     if (this.registerForm.valid) {
-      this.authService.signupUser(email, password );
+      this.logInService.signupUser(email, password );
     } else {
       Object.keys(this.registerForm.controls).forEach(field => { // {1}
         const control = this.registerForm.get(field);            // {2}

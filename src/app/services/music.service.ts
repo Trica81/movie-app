@@ -4,7 +4,7 @@ import { Music } from '../classes/music';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
-import { AuthService } from './auth.service';
+import { LogInService } from './log-in.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 
 export class MusicService {
 
-  constructor( private router: Router, private _http: HttpClient, private authService: AuthService ) { }
+  constructor( private router: Router, private _http: HttpClient, private logInService: LogInService ) { }
 
   private BASE_URL = 'http://ws.audioscrobbler.com/2.0/';
   private music: Music[];
@@ -83,6 +83,7 @@ export class MusicService {
   loadArtist(id: string) {
     const f = this.artistApiCall.find(item => item.id === id);
     if ( f ) {
+
       this._artist.next(f.value);
     } else {
       this._http.get<any>(`${this.BASE_URL}?method=artist.getinfo&mbid=${id}&api_key=7aca6ef86ceb095034f88fa36aa6e3f9&format=json`)
@@ -93,7 +94,8 @@ export class MusicService {
             bio: item.artist.bio.content,
             img: item.artist.image[4]['#text'],
             tag: item.artist.tags.tag,
-            url: item.artist.url
+            url: item.artist.url,
+            id: item.artist.mbid
           };
           return artist;
         })
@@ -168,6 +170,10 @@ export class MusicService {
 
   goToArtist(id: string) {
     this.router.navigate(['artists/' + id]);
+  }
+
+  userId() {
+    return this.logInService.getUserId();
   }
 
   goToSong( id: string) {

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
 import { MusicService } from 'src/app/services/music.service';
+import { LogInService } from 'src/app/services/log-in.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,14 +14,14 @@ export class NavBarComponent implements OnInit, OnDestroy {
   subscribe = new Subscription();
   private isLogIn: boolean;
 
-  constructor ( private authService: AuthService, private musicService: MusicService) {}
+  constructor ( private logInService: LogInService, private musicService: MusicService) {}
 
   logOut () {
-    this.authService.logOut();
+    this.logInService.logOut();
   }
   ngOnInit () {
-    this.authService.isLogged();
-    this.subscribe = this.authService.isLoggin$.subscribe(isLog => {
+    this.logInService.isLogged();
+    this.subscribe = this.logInService.isLoggin$.subscribe(isLog => {
       this.isLogIn = isLog;
     });
   }

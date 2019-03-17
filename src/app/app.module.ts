@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { LogInGuard } from './services/login.guard';
+import { AuthGuard } from './services/auth.guard';
 import { AppComponent } from './app.component';
 import { MusicListComponent } from './pages/music-list/music-list.component';
 import { PointerDirective } from './directive/pointer.directive';
@@ -21,8 +21,8 @@ import { SongCardComponent } from './components/song-card/song-card.component';
 import { SongPageComponent } from './pages/song-page/song-page.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
-import { AuthService } from './services/auth.service';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { LogInService } from './services/log-in.service';
 
 
 
@@ -53,7 +53,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [LogInGuard, AuthService],
+  providers: [AuthGuard, LogInService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

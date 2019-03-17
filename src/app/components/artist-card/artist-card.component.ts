@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-artist-card',
@@ -11,9 +11,18 @@ export class ArtistCardComponent implements OnInit {
   @Input() img: string;
   @Input() tags: any[];
   @Input() bio: string;
+  @Input() id: string;
+  @Input() isLiked: boolean;
+  @Output() sendArtistId = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  likeMe() {
+    this.sendArtistId.emit(this.id);
   }
 
 }

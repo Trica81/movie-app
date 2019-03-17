@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { MusicService } from 'src/app/services/music.service';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
+import { LogInService } from 'src/app/services/log-in.service';
 
 @Component({
   selector: 'app-alert-msg',
@@ -19,7 +19,7 @@ export class AlertMsgComponent implements OnInit, OnDestroy {
   msgSub: Subscription;
 
 
-  constructor( private musicService: MusicService, private authService: AuthService, private el: ElementRef) { }
+  constructor( private musicService: MusicService, private logInService: LogInService, private el: ElementRef) { }
 
   isShow = false;
 
@@ -36,7 +36,7 @@ export class AlertMsgComponent implements OnInit, OnDestroy {
       this.msgShow(item);
     });
 
-    this.msgSub = this.authService.error$.subscribe(error => {
+    this.msgSub = this.logInService.error$.subscribe(error => {
       this.msgShow(error);
     });
   }

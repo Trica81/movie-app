@@ -1,7 +1,10 @@
 <div *ngIf="artistData != null">
     <app-artist-card 
+      (sendArtistId)="onLikeArtist($event)"
       [artistName]="artistData.name"
       [img]="artistData.img"
       [bio]="artistData.bio"
-      [tags]="artistData.tag"></app-artist-card>
+      [tags]="artistData.tag"
+      [isLiked]="isLiked"
+      [id]="artistData.id"></app-artist-card>
 </div>
