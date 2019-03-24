@@ -15,7 +15,6 @@ export class TrackCardComponent implements OnInit {
   @Input() public name: string;
   @Input() public url: string;
   @Input() public mbid: string;
-  imgUrl: string;
 
 
   @Output() musicArtist = new EventEmitter();
@@ -32,7 +31,6 @@ export class TrackCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.imgUrl = this.image['#text'];
   }
 
 }

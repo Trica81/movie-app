@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Music } from '../classes/music';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { LogInService } from './log-in.service';
+import { Artist } from '../classes/artist';
+import { Song } from '../classes/song';
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +18,20 @@ export class MusicService {
   constructor( private router: Router, private _http: HttpClient, private logInService: LogInService ) { }
 
   private BASE_URL = 'http://ws.audioscrobbler.com/2.0/';
-  private music: Music[];
-  private user: any;
 
   private _mucicItems: BehaviorSubject<Music[]> = new BehaviorSubject<Music[]>([]);
-  private _artist: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  private _song: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  private _artist: BehaviorSubject<Artist> = new BehaviorSubject<Artist>(null);
+  private _song: BehaviorSubject<Song> = new BehaviorSubject<Song>(null);
   private _msg: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   private _user: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  private _country: BehaviorSubject<string> = new BehaviorSubject<string>('serbia');
 
   user$ = this._user.asObservable();
   musicItems$ = this._mucicItems.asObservable();
   artistData$ = this._artist.asObservable();
   songData$ = this._song.asObservable();
   msg$ = this._msg.asObservable();
+  country$ = this._country.asObservable();
 
   private countryApiCall = [];
   private artistApiCall = [];
@@ -39,6 +41,7 @@ export class MusicService {
 
   loadTracks (country) {
     const f = this.countryApiCall.find(item => item.country === country);
+    this._country.next(country);
     if ( f ) {
       this._mucicItems.next(f.value);
     } else {
@@ -54,7 +57,7 @@ export class MusicService {
                   attr: track['@attr'],
                   artist: track.artist,
                   duration: track.duration,
-                  image: track.image,
+                  image: track.image[3]['#text'],
                   listeners: track.listeners,
                   mbid: track.mbid,
                   name: track.name,
@@ -65,7 +68,7 @@ export class MusicService {
               return tracks;
             }
           })
-        ).subscribe(data => {
+        ).subscribe((data: Music[]) => {
           if (data.length > 0) {
             this.countryApiCall.push({
               country: country,
@@ -88,8 +91,8 @@ export class MusicService {
     } else {
       this._http.get<any>(`${this.BASE_URL}?method=artist.getinfo&mbid=${id}&api_key=7aca6ef86ceb095034f88fa36aa6e3f9&format=json`)
       .pipe(
-        map(item => {
-          const artist = {
+        map((item) => {
+          const artist: Artist = {
             name: item.artist.name,
             bio: item.artist.bio.content,
             img: item.artist.image[4]['#text'],
@@ -100,7 +103,7 @@ export class MusicService {
           return artist;
         })
       )
-      .subscribe(item => {
+      .subscribe((item: Artist) => {
         if (item != null) {
           this.artistApiCall.push({
             id: id,
@@ -146,7 +149,7 @@ export class MusicService {
               return song;
             }
           })
-        ).subscribe(item => {
+        ).subscribe((item: Song) => {
           if (item != null) {
             this.songApiCall.push({
               id: id,
@@ -168,16 +171,8 @@ export class MusicService {
     this._msg.next(this._infoMsg);
   }
 
-  goToArtist(id: string) {
-    this.router.navigate(['artists/' + id]);
-  }
-
   userId() {
     return this.logInService.getUserId();
-  }
-
-  goToSong( id: string) {
-    this.router.navigate(['song/' + id]);
   }
 
 }

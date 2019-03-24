@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { MusicService } from 'src/app/services/music.service';
 import { Music } from 'src/app/classes/music';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-music-list',
@@ -16,13 +17,13 @@ export class MusicListComponent implements OnInit, OnDestroy {
   searchProperty = 'name';
 
 
-  constructor( private musicService: MusicService ) { }
+  constructor( private musicService: MusicService, private router: Router) { }
 
   getArtist(id: string) {
     if (id === '') {
       this.musicService.msgInfo(`There is no data available for this artist.`);
     } else {
-    this.musicService.goToArtist(id);
+      this.router.navigate(['artists/' + id]);
     }
   }
 
@@ -30,7 +31,7 @@ export class MusicListComponent implements OnInit, OnDestroy {
     if (id === '') {
       this.musicService.msgInfo(`There is no data available for this song.`);
     } else {
-      this.musicService.goToSong(id);
+      this.router.navigate(['song/' + id]);
     }
   }
 

@@ -2,7 +2,7 @@
 <div class="wrapper">
   <div class="track-card">
     <div class="track-card_image">
-      <img  class="card-img h-100" [src]="imgUrl" alt="{{artist.name}}" />
+      <img  class="card-img h-100" [src]="image" alt="{{artist.name}}" />
     </div>
     <div appPointer class="card-artist" (click)="detailArtist()">Artist: {{ artist.name }}</div>
     <div class="track-card-song" (click)="detailSong()">Song: {{ name }}</div>
