@@ -133,13 +133,13 @@ export class MusicService {
             } else {
               return new Song({
                 src: item.track.album.image[3]['#text'] || 'https://www.freeiconspng.com/uploads/music-red-symbol-free-icon-27.png',
-                tags: item.track.toptags.tag || [],
-                songName: item.track.name || null,
-                songArtist: item.track.album.artist || null,
+                tags: item.track.toptags.tag,
+                songName: item.track.name,
+                songArtist: item.track.album.artist,
                 songAlbum: item.track.album.title,
-                publishDate: item.track.wiki.published || null,
-                link: item.track.url || null,
-                wiki: item.track.wiki.summary || null,
+                publishDate: item.track.wiki.published,
+                link: item.track.url,
+                wiki: item.track.wiki.summary,
                 mbid: item.track.mbid
               });
             }
