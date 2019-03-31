@@ -25,7 +25,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     MusicListRoutingModule,
     SharedModule
-
   ]
 })
 export class MusicListModule { }

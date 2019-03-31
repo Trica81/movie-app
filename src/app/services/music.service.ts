@@ -7,6 +7,7 @@ import { map, filter } from 'rxjs/operators';
 import { LogInService } from './log-in.service';
 import { Artist } from '../classes/artist';
 import { Song } from '../classes/song';
+import { InfoMessage } from '../classes/info-message';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,8 @@ export class MusicService {
   private _artist: BehaviorSubject<Artist> = new BehaviorSubject<Artist>(null);
   private _song: BehaviorSubject<Song> = new BehaviorSubject<Song>(null);
   private _msg: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  private _user: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  private _country: BehaviorSubject<string> = new BehaviorSubject<string>('serbia');
+  private _country: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  user$ = this._user.asObservable();
   musicItems$ = this._mucicItems.asObservable();
   artistData$ = this._artist.asObservable();
   songData$ = this._song.asObservable();
@@ -53,7 +52,7 @@ export class MusicService {
              return [];
             } else {
               const tracks = item.tracks.track.map((track) => {
-                return {
+                return new Music({
                   attr: track['@attr'],
                   artist: track.artist,
                   duration: track.duration,
@@ -63,7 +62,7 @@ export class MusicService {
                   name: track.name,
                   streamable: track.streamable,
                   url: track.url
-                };
+                });
               });
               return tracks;
             }
@@ -77,7 +76,6 @@ export class MusicService {
           } else {
             data = [];
           }
-
           this._mucicItems.next(data);
         });
       }
@@ -92,15 +90,14 @@ export class MusicService {
       this._http.get<any>(`${this.BASE_URL}?method=artist.getinfo&mbid=${id}&api_key=7aca6ef86ceb095034f88fa36aa6e3f9&format=json`)
       .pipe(
         map((item) => {
-          const artist: Artist = {
+          return new Artist({
             name: item.artist.name,
             bio: item.artist.bio.content,
             img: item.artist.image[4]['#text'],
             tag: item.artist.tags.tag,
             url: item.artist.url,
             id: item.artist.mbid
-          };
-          return artist;
+          });
         })
       )
       .subscribe((item: Artist) => {
@@ -128,14 +125,13 @@ export class MusicService {
         .pipe(
           map( item => {
             if (item.error) {
-              this._infoMsg = {
+
+              this._msg.next(new InfoMessage({
                 message: item.message,
                 msgClass: 'alert-warning'
-              };
-
-              this._msg.next(this._infoMsg);
+              }));
             } else {
-              const song = {
+              return new Song({
                 src: item.track.album.image[3]['#text'] || 'https://www.freeiconspng.com/uploads/music-red-symbol-free-icon-27.png',
                 tags: item.track.toptags.tag || [],
                 songName: item.track.name || null,
@@ -145,8 +141,7 @@ export class MusicService {
                 link: item.track.url || null,
                 wiki: item.track.wiki.summary || null,
                 mbid: item.track.mbid
-              };
-              return song;
+              });
             }
           })
         ).subscribe((item: Song) => {
@@ -163,15 +158,14 @@ export class MusicService {
       }
   }
 
-  msgInfo (msg) {
-    this._infoMsg = {
+  msgInfo (msg): void {
+    this._msg.next(new InfoMessage({
       message: msg,
       msgClass: 'alert-warning'
-    };
-    this._msg.next(this._infoMsg);
+    }));
   }
 
-  userId() {
+  userId(): string {
     return this.logInService.getUserId();
   }
 

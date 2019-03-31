@@ -13,23 +13,23 @@ export class SignupComponent implements OnInit {
 
 
 
-  constructor( private logInService: LogInService, private musicService: MusicService, private fb: FormBuilder) { }
+  constructor(private logInService: LogInService, private musicService: MusicService, private fb: FormBuilder) { }
 
   registerForm: FormGroup;
 
   get f() { return this.registerForm.controls; }
 
-  MatchPassword  (control: AbstractControl) {
+  MatchPassword(control: AbstractControl) {
     const password = control.get('password').value;
 
     const confirmPassword = control.get('passwordConfirm').value;
 
-     if (password !== confirmPassword) {
-         control.get('passwordConfirm').setErrors( {MatchPassword: true} );
-     } else {
+    if (password !== confirmPassword) {
+      control.get('passwordConfirm').setErrors({ MatchPassword: true });
+    } else {
       return null;
-     }
- }
+    }
+  }
 
 
   ngOnInit() {
@@ -38,17 +38,17 @@ export class SignupComponent implements OnInit {
       password: new FormControl('', Validators.required),
       passwordConfirm: new FormControl('', Validators.required),
       userName: new FormControl('', Validators.required)
-    }, { validator: this.MatchPassword});
+    }, { validator: this.MatchPassword });
   }
 
-  onSubmit ( ) {
-    const { email, password, userName, passwordConfirm } = this.registerForm.value;
+  onSubmit(): void {
+    const { email, password } = this.registerForm.value;
     if (this.registerForm.valid) {
-      this.logInService.signupUser(email, password );
+      this.logInService.signupUser(email, password);
     } else {
-      Object.keys(this.registerForm.controls).forEach(field => { // {1}
-        const control = this.registerForm.get(field);            // {2}
-        control.markAsTouched({ onlySelf: true });       // {3}
+      Object.keys(this.registerForm.controls).forEach(field => {
+        const control = this.registerForm.get(field);
+        control.markAsTouched({ onlySelf: true });
       });
     }
 

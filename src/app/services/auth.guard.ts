@@ -9,6 +9,7 @@ import { LogInService } from './log-in.service';
 export class AuthGuard implements CanActivate {
 
     constructor(private logInService: LogInService, private musicService: MusicService,  private router: Router ) { }
+
     canActivate ( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         // return true;
         const userToken = this.logInService.getUserToken();

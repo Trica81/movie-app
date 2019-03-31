@@ -2,10 +2,12 @@ export class Tag {
     public url: string;
     public name: string;
 
-    constructor( value: any = {}) {
-        Object.assign(this, {
-            name: value.name || null,
-            url: value.url || null
-        });
+    constructor( tag: any = {}) {
+        if ( tag ) {
+            Object.assign(this, {
+                name: tag.name || null,
+                url: tag.url || null
+            });
+        }
     }
 }

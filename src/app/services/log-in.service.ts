@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -14,7 +14,8 @@ export class LogInService {
     error$ = this._error.asObservable();
 
     constructor(private router: Router) { }
-    signupUser( email: string, password: string) {
+
+    signupUser( email: string, password: string): void {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(response => {
                 console.log(response);
@@ -31,7 +32,7 @@ export class LogInService {
             );
     }
 
-    signinUser( email: string, password: string) {
+    signinUser( email: string, password: string): void {
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(
             response => {
@@ -54,16 +55,15 @@ export class LogInService {
         );
     }
 
-    getUserToken () {
+    getUserToken (): string {
         return localStorage.getItem('Token');
     }
 
-    getUserId() {
-       const id = localStorage.getItem('UserId');
-        return id;
+    getUserId(): string {
+        return localStorage.getItem('UserId');
     }
 
-    isLogged () {
+    isLogged (): void {
         if (localStorage.getItem('Token')) {
             this._isLoggin.next(true);
         } else {
@@ -71,7 +71,7 @@ export class LogInService {
         }
     }
 
-    logOut () {
+    logOut (): void {
         firebase.auth().signOut();
         localStorage.removeItem('Token');
         localStorage.removeItem('UserId');

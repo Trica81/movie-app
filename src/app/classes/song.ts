@@ -11,17 +11,19 @@ export class Song {
     public tags: Tag[];
     public wiki: string;
 
-    constructor ( value: any = {}) {
-        Object.assign(this, {
-            link: value.link || null,
-            mbid: value.mbid || null,
-            publishDate: value.publishDate || null,
-            songAlbum: value.songAlbum || null,
-            songArtist: value.songArtist || null,
-            songName: value.songName || null,
-            src: value.src || null,
-            tags: value.tags || null,
-            wiki: value.wiki || null,
-        });
+    constructor ( song: any = {}) {
+        if ( song )  {
+            Object.assign(this, {
+                link: song.link || null,
+                mbid: song.mbid || null,
+                publishDate: song.publishDate || null,
+                songAlbum: song.songAlbum || null,
+                songArtist: song.songArtist || null,
+                songName: song.songName || null,
+                src: song.src || null,
+                tags: song.tags || null,
+                wiki: song.wiki || null,
+            });
+        }
     }
 }

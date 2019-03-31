@@ -11,18 +11,20 @@ export class Music {
     public streamable: string;
     public url: string;
 
-    constructor (value: any = {}) {
-        Object.assign(this, {
-            attr: value.attr || null,
-            artist: value.artist || null,
-            duration: value.duration || null,
-            image: value.image || null,
-            listeners: value.listeners || null,
-            mbid: value.mbid || null,
-            name: value.name || null,
-            streamable: value.streamable || null,
-            url: value.url || null
-        });
+    constructor (music: any = {}) {
+        if (music) {
+            Object.assign(this, {
+                attr: music.attr || null,
+                artist: music.artist || null,
+                duration: music.duration || null,
+                image: music.image || null,
+                listeners: music.listeners || null,
+                mbid: music.mbid || null,
+                name: music.name || null,
+                streamable: music.streamable || null,
+                url: music.url || null
+            });
+        }
     }
 
 

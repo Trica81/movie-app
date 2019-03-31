@@ -1,22 +1,28 @@
 import { Tag } from './tag';
 
 export class Artist {
-    public name: string;
-    public bio: string;
-    public img: string;
-    public tag: Tag[];
-    public url: string;
-    public id: string;
+    private name: string;
+    private bio: string;
+    private img: string;
+    private tag: Tag[];
+    private url: string;
+    private id: string;
 
 
-    constructor (value: any = {}) {
-        Object.assign(this, {
-            name: value.name || null,
-            bio: value.bio || null,
-            img: value.image || null,
-            tag: value.tag || null,
-            url: value.url || null,
-            id: value.mbid || null
-        });
+    constructor (artist: any = {}) {
+        if ( artist ) {
+            Object.assign(this, {
+                name: artist.name || null,
+                bio: artist.bio || null,
+                img: artist.img || null,
+                tag: artist.tag || null,
+                url: artist.url || null,
+                id: artist.id || null
+            });
+        }
+    }
+
+    getName (): string {
+        return this.name;
     }
 }
